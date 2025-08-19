@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        humanScore = 0
+        computerScore = 0
+
+        function getComputerChoice() {
+            let number = Math.random()
+            if (number < (1/3)) {
+                return "rock"
+            } else if (number < (2/3)) {
+                return "paper"
+            } else if (number < 1) {
+                return "scissor"
+            }
+        }
+
+        function getHumanChoice() {
+            let choice = prompt("Rock, Paper, Scissor?").toLowerCase()
+            while (true) {
+                if (choice == "rock" || choice == "paper" || choice == "scissor") {
+                    break
+                }
+                choice = prompt("Try again: ").toLowerCase()
+            }
+            return choice 
+        }
+
+        function playRound(humanChoice, computerChoice) {
+            win = null
+            if ((humanChoice == "rock" && computerChoice == "scissor") || (humanChoice == "paper" && computerChoice == "rock") || (humanChoice == "scissor" && computerChoice == "paper")) {
+                console.log(`You win! ${humanChoice[0].toUpperCase() + humanChoice.slice(1)} beats ${computerChoice[0].toUpperCase() + computerChoice.slice(1)}`)
+                humanScore++
+            } else if (humanChoice == computerChoice) {
+                console.log("Draw!")
+                humanScore++
+                computerScore++
+            } else {
+                console.log(`You lose! ${computerChoice[0].toUpperCase() + computerChoice.slice(1)} beats ${humanChoice[0].toUpperCase() + humanChoice.slice(1)}`)
+                computerScore++
+            }
+        }
+
+        for (let i = 0; i < 5; i++){
+            playRound(getHumanChoice(), getComputerChoice())
+        }
+        let outcome = ""
+        if (humanScore > computerScore) {
+            outcome = "win"
+        } else if (humanScore < computerScore) {
+            outcome = "lose"
+        } else {
+            outcome = "draw"
+        }
+
+        console.log(`Final Score:\nYou have ${String(humanScore)} point(s), the computer has ${String(computerScore)} point(s) so you ${outcome}!`)    
+        
+    </script>
+</head>
+<body>
+    <h1>Hello</h1>
+</body>
+</html>
